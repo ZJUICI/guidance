@@ -22,8 +22,9 @@ cd guidance && python setup.py install
 [image build code](https://github.com/zTaoplus/mirrored-image/tree/main/tgi)
 ```sh
 export volume=<your model path>
+export model=<mounted model path in the container> # current is '/data'
 
-docker run --gpus all --shm-size 1g -p 8080:80 -v $volume:/data zjuici/mirror.huggingface.text-generation-inference:1.1.0-guidance-transformers-4.35.0  --model-id $model
+docker run --gpus all --shm-size 1g -p 8080:80 -v $volume:/data zjuici/mirror.huggingface.text-generation-inference:1.1.0-guidance-transformers-4.35.0  --model-id $model --max-batch-prefill-tokens 3584 --max-input-length 3584 --max-total-tokens 4096
 
 ```
 
